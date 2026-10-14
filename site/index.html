@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="QRGO – Universal QR code generator">
+<meta property="og:description" content="Generate scannable QR codes in your browser. Nothing is uploaded.">
+<meta property="og:type" content="website">
+<title>QRGO – Universal QR code generator</title>
+<meta name="description" content="Generate scannable QR codes for links, Wi-Fi, contacts, events and more. Everything runs in your browser.">
+  <script type="module" crossorigin src="./assets/index-DXzwmZ09.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CTbiDVQe.css">
+</head>
+<body>
+<header><div class="logo">QR<b>GO</b></div><button class="btn" id="theme" aria-label="Toggle theme">Theme</button></header>
+<main>
+<section class="card" aria-labelledby="h1">
+<h2 id="h1">1. Choose type &amp; enter content</h2>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div id="fields"></div>
+<div class="err" role="alert" id="err"></div>
+
+<h2 style="margin-top:22px">2. Customize</h2>
+<div class="row">
+<div><label for="fg">Foreground</label><div class="sw"><input type="color" id="fg" value="#065f46" aria-label="Foreground colour"><input type="text" id="fgh" value="#065f46" maxlength="7" aria-label="Foreground HEX"></div></div>
+<div><label for="bg">Background</label><div class="sw"><input type="color" id="bg" value="#ffffff" aria-label="Background colour"><input type="text" id="bgh" value="#ffffff" maxlength="7" aria-label="Background HEX"></div></div>
+<div><label for="size">Size (px)</label><select id="size"><option>256</option><option selected>512</option><option>1024</option><option>2048</option></select></div>
+<div><label for="ec">Error correction</label><select id="ec"><option value="L">L (7%)</option><option value="M" selected>M (15%)</option><option value="Q">Q (25%)</option><option value="H">H (30%)</option></select></div>
+<div><label for="dots">Module style</label><select id="dots"><option value="square">Square</option><option value="dots">Dots</option><option value="rounded" selected>Rounded</option><option value="extra-rounded">Extra rounded</option><option value="classy">Classy</option></select></div>
+<div><label for="corner">Corner style</label><select id="corner"><option value="square">Square</option><option value="extra-rounded" selected>Rounded</option><option value="dot">Dot</option></select></div>
+<div><label for="margin">Quiet zone: <span id="mv">16</span>px</label><input type="range" id="margin" min="8" max="48" value="16" style="width:100%"></div>
+<div><label for="logo">Centre logo (PNG/JPG/SVG, ≤1 MB)</label><input type="file" id="logo" accept="image/png,image/jpeg,image/svg+xml"></div>
+</div>
+<div class="acts"><button class="btn" id="reset">Reset appearance</button><button class="btn" id="rmlogo">Remove logo</button></div>
+<div class="warn" id="warn" hidden></div>
+</section>
+
+<aside>
+<section class="card" aria-labelledby="h3">
+<h2 id="h3">3. Preview &amp; download</h2>
+<div id="prev" aria-live="polite"><span class="hint">Fill in the form to see your QR code.</span></div>
+<div class="acts">
+<button class="btn pri" id="dlpng">Download PNG</button>
+<button class="btn" id="dlsvg">Download SVG</button>
+<button class="btn" id="cppay">Copy payload</button>
+<button class="btn" id="cpimg">Copy image</button>
+<button class="btn" id="print">Print</button>
+<button class="btn" id="save">Save to history</button>
+</div>
+<p class="hint">Codes are generated in your browser. Nothing is uploaded.</p>
+</section>
+<section class="card" style="margin-top:16px" aria-labelledby="h4">
+<h2 id="h4">History (this browser only)</h2>
+<div id="hist"><span class="hint">Nothing saved yet.</span></div>
+<div class="acts"><button class="btn" id="clr">Clear all</button></div>
+<p class="hint">Wi-Fi passwords are never saved to history.</p>
+</section>
+</aside>
+</main>
+<div style="max-width:1100px;margin:0 auto;padding:0 24px 24px">
+<section class="card" aria-labelledby="hm" id="media">
+<h2 id="hm">Photo / video to QR (uses your own storage)</h2>
+<p class="hint">A QR code cannot contain a photo or video, so the file is uploaded to the Supabase storage bucket configured by the site owner and the QR code links to it. JPG, PNG, WebP, GIF, MP4 or WebM, up to 50 MB.</p>
+<label for="mfile">File</label><input type="file" id="mfile" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm">
+<label style="font-weight:400"><input type="checkbox" id="mok"> I understand the file becomes publicly accessible to anyone with the link.</label>
+<div class="acts"><button class="btn pri" id="mup">Upload and create QR</button></div>
+<p id="mstat" role="status" class="hint" style="word-break:break-all"></p>
+</section>
+<section class="card" style="margin-top:16px" aria-labelledby="hb" id="bulk">
+<h2 id="hb">Bulk generator (CSV → ZIP)</h2>
+<p class="hint">CSV needs a header row with a <code>data</code> column (and optional <code>name</code>). Uses the appearance settings above. Max 500 rows (200 at 1024 px or larger), 1 MB.</p>
+<div class="row"><div><label for="bmode">Treat data as</label><select id="bmode"><option value="url">Website URLs (http/https)</option><option value="text">Plain text</option></select></div>
+<div><label for="bfile">CSV file (UTF-8)</label><input type="file" id="bfile" accept=".csv,text/csv,text/plain"></div></div>
+<div class="acts"><button class="btn" id="btpl">Download CSV template</button><button class="btn pri" id="bzip" disabled>Download all as ZIP</button></div>
+<p id="bstat" role="status" class="hint"></p>
+<ul id="berr" class="err" style="padding-left:18px"></ul>
+<div id="bgrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px"></div>
+</section>
+<section class="card" style="margin-top:16px" aria-labelledby="hc">
+<h2 id="hc">Configuration &amp; help</h2>
+<div class="acts"><button class="btn" id="cexp">Export configuration (JSON)</button><label class="btn" style="margin:0;font-weight:400">Import configuration<input type="file" id="cimp" accept=".json,application/json" hidden></label></div>
+<p class="hint">Exports never include Wi-Fi passwords. Other fields (names, phone numbers, addresses) are included, so treat the file as personal data.</p>
+<details><summary>Help / FAQ</summary><p class="hint">Pick a type, fill the fields, adjust the look, then download PNG or SVG. Always test-scan a printed code. Use error correction H with a logo and keep strong contrast. Dynamic (editable) QR codes need a server and are not available in this static version.</p></details>
+<details><summary>Privacy</summary><p class="hint">QR codes, logos and CSV files are processed locally and never uploaded. History is stored in this browser's localStorage only and does not sync between devices. This page bundles its QR and ZIP libraries, so no third-party requests are made. No analytics are used.</p></details>
+<details><summary>About, Terms &amp; Contact</summary><p class="hint">QRGO is a free static QR generator provided as is, without any guarantee that every code scans on every device. Owner contact: [add your contact details here]. This page makes no legal-compliance claims.</p></details>
+</section></div>
+<footer>© <span id="yr"></span> QRGO · Static version: no accounts, dynamic redirects or scan analytics.</footer>
+<div id="toast" role="status"></div>
+
+</body></html>

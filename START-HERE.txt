@@ -1,0 +1,17 @@
+QRGO - everything in one folder
+
+TO RUN IT (Windows): double-click  RUN-QRGO.bat
+  It starts a small local server and opens QRGO in your browser.
+  Needs Node.js (https://nodejs.org). Close the black window to stop it.
+  Mac/Linux: run  ./run.sh
+
+TO DEVELOP: run these in the QRGO folder (the one containing site/ and source/):  npm install   then   npm run dev   (also: npm test, npm run build, npm start)
+  Or in a terminal:  cd source   then   npm install   and   npm run dev
+
+site/    Ready-to-host website, already connected to your Supabase project "qrgo".
+         To publish: upload the CONTENTS of site/ to any static host.
+source/  Full project (Vite). Includes .env with your Supabase URL and public key.
+         Do not commit .env to a public repository; see source/README.md.
+
+Owner to-do: replace "[add your contact details here]" in source/index.html, then run npm run build in source/
+and copy source/dist/* into site/.

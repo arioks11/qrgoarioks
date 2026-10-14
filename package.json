@@ -1,0 +1,1 @@
+{"name":"qrgoarioks","private":true,"scripts":{"postinstall":"npm --prefix source install","dev":"npm --prefix source run dev","build":"npm --prefix source run build","test":"npm --prefix source test","start":"node serve.mjs"}}
